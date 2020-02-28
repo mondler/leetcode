@@ -50,19 +50,42 @@ class Solution(object):
         :rtype: int
         """
         g, s = sorted(g), sorted(s)
-        res = 0  # number of content child
+        count = 0  # number of content child
         i = 0  # index for child
         j = 0  # index for cookie
         m = len(s)  # length/number of cookie
         n = len(g)  # number of child
         while j < m:
             if s[j] >= g[i]:
-                res += 1
+                count += 1
                 i += 1
                 if i >= n:  # every child satisfied
                     return n
             j += 1
-        return res
+        return count
+
+ # %%
+
+
+class Solution(object):
+    def findContentChildren(self, g, s):
+        """
+        :type g: List[int]
+        :type s: List[int]
+        :rtype: int
+        """
+        g = sorted(g, reverse=True)  # lowest greedy child put to end
+        s = sorted(s)
+
+        count = 0
+        for sj in s:
+            if sj >= g[-1]:
+                g.pop()
+                count += 1
+            if not g:
+                return count
+        return count
+
 
 
 # %%
