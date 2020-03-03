@@ -1,3 +1,14 @@
+# https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/
+# 122. Best Time to Buy and Sell Stock II
+# Easy
+#
+# 1678
+#
+# 1574
+#
+# Add to List
+#
+# Share
 # Say you have an array for which the ith element is the price of a given stock on day i.
 #
 # Design an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).
@@ -22,6 +33,22 @@
 # Input: [7,6,4,3,1]
 # Output: 0
 # Explanation: In this case, no transaction is done, i.e. max profit = 0.
+
+
+# %% # profit as long as curr larger than previous
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        n = len(prices)
+        # if n <= 1:
+        #     return 0
+        profit = 0
+        for i in range(n - 1):
+            profit += max(0, prices[i + 1] - prices[i])
+        return profit
 
 # %%
 
