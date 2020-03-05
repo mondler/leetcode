@@ -10,6 +10,30 @@
 # If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 
 
+# %%
+
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) == 1:
+            return nums[0]
+        maxSum = nums[0]
+        newSum = maxSum
+        for n in nums[1:]:
+            if newSum > 0:  # keep previous sum if it is larger than zero
+                newSum = newSum + n
+            else:
+                newSum = n
+            maxSum = max(newSum, maxSum)  # record current max
+        return maxSum
+
+
+# %%
+
+
 class Solution:
     def maxSubArray(self, nums):
         """
