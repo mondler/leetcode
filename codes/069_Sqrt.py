@@ -30,7 +30,7 @@
 # Submissions
 # 1,476,015
 
-# %%
+# %% binary search
 
 
 class Solution(object):
