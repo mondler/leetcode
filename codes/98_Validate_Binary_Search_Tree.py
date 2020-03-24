@@ -133,18 +133,3 @@ a.right = c
 
 
 Solution().isValidBST(a)
-
-
-# %%
-class test:
-    def test(self) -> bool:
-        prev = 2
-
-        def inOrder():
-            if prev is None:
-                print("TRUE")
-            print(prev)
-        inOrder()
-
-
-test().test()
