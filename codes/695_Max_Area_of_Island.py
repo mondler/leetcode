@@ -86,6 +86,8 @@ class Solution(object):
         if h == 0:
             return 0
         w = len(grid[0])
+        if w == 0:
+            return 0
 
         def area(r, c):
             if r < 0 or r >= h or c < 0 or c >= w or grid[r][c] == 0:
