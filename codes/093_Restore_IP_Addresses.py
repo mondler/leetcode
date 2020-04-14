@@ -33,6 +33,8 @@ class Solution(object):
         """
         # s = "25525511135"
         n = len(s)
+        if n == 0:
+            return []
 
         ans = set()
 
