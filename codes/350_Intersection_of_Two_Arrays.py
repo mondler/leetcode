@@ -79,3 +79,38 @@ nums1 = [9, 9, 4]
 # nums2 = [9]
 nums2 = [9, 4, 9, 8, 4]
 Solution().intersect(nums1, nums2)
+
+
+# %% extension: if both nums are sorted
+
+
+class Solution:
+    def intersect(self, nums1: list[int], nums2: list[int]) -> list[int]:
+
+        res = []
+
+        i, j = 0, 0
+
+        m, n = len(nums1), len(nums2)
+
+        while (i < m) and (j < n):
+            n1 = nums1[i]
+            n2 = nums2[j]
+            # print(i, j)
+            if n1 == n2:
+                res.append(n1)
+                i += 1
+                j += 1
+            elif n1 < n2:
+                i += 1
+            else:
+                j += 1
+
+        return res
+
+
+# %%
+nums1 = []
+# nums2 = [9]
+nums2 = [2, 3, 4]
+Solution().intersect(nums1, nums2)
