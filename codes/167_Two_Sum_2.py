@@ -35,8 +35,6 @@ class Solution(object):
                 r -= 1
 
 
-# %%
-
 numbers = [2, 7, 11, 15]
 target = 22
 Solution().twoSum(numbers, target)
