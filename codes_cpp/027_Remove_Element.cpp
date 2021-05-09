@@ -42,48 +42,31 @@ void swap(int& x, int&y){
 int removeElement(vector<int>& nums, int val) {
         int i, j;
         i = 0;
-        j = nums.size() - 1;
+        j = 0;
+        int s = nums.size();
 
-        if (j < 0) {
-                return 0;
-        }
-
-        while ((j >= 0) && (nums[j] == val)) {
-                j--;
-        }
-
-        if (j <= 0) {
-                return (j + 1);
-        }
-
-        while (i <= j) {
-                // cout << i << ' ' << j << endl;
-                if (nums[i] != val) {
+        while ((i < s) && (j < s)) {
+                while ((i < s) && (nums[i] != val)) {
                         i++;
                 }
-                else {
+                j = max(j, i + 1);
+                while ((j < s) && (nums[j] == val)) {
+                        j++;
+                }
+                // cout << i << ' ' << j << endl;
+                if ((i < s) && (j < s)) {
                         swap(nums[i], nums[j]);
-                        i++;
-                        do  {
-                                j--;
-                        }
-                        while ((j >= i) && (nums[j] == val));
                 }
-                // for (const auto k: nums)
-                //         cout << k << ' ';
-                // cout << endl;
-                // cout << i << ' ' << j << endl;
         }
 
         return i;
 }
 };
 
-
 //
 
 int main() {
-        std::vector<int> nums = { 2,2,3};
+        std::vector<int> nums = {1,2,2,3};
         int val = 2;
 
         Solution foo = Solution();
