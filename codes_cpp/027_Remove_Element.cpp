@@ -42,6 +42,35 @@ void swap(int& x, int&y){
 int removeElement(vector<int>& nums, int val) {
         int i, j;
         i = 0;
+        // j = 0;
+        int s = nums.size();
+        j = s - 1;
+
+        // for corner case: i = j = 0
+        while ((i < s) && (nums[i] != val)) {
+                i++;
+        }
+
+        while (i < j) {
+                while ((i < j) && (nums[i] != val)) {
+                        i++;
+                }
+                // j = max(j, i + 1);
+                while ((i < j) && (nums[j] == val)) {
+                        j--;
+                }
+                // cout << i << ' ' << j << endl;
+                if (i < j) {
+                        swap(nums[i], nums[j]);
+                }
+        }
+
+        return i;
+}
+
+int removeElement2(vector<int>& nums, int val) {
+        int i, j;
+        i = 0;
         j = 0;
         int s = nums.size();
 
@@ -66,7 +95,7 @@ int removeElement(vector<int>& nums, int val) {
 //
 
 int main() {
-        std::vector<int> nums = {1,2,2,3};
+        std::vector<int> nums = {1};
         int val = 2;
 
         Solution foo = Solution();
