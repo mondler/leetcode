@@ -1,4 +1,4 @@
-# 41. Linked List Cycle
+# 141. Linked List Cycle
 # Easy
 #
 # 2249
@@ -25,9 +25,28 @@
 # slow and fast runner will finally meet if cycle exists
 # https://en.wikipedia.org/wiki/Cycle_detection#Tortoise_and_hare
 
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
 
 class Solution(object):
     def hasCycle(self, head):
+        if head is None:
+            return False
+
+        fast = head
+
+        while (fast and fast.next):
+            fast = fast.next.next
+            head = head.next
+            if (fast == head):
+                return True
+
+        return False
+
+    def hasCycle2(self, head):
         """
         :type head: ListNode
         :rtype: bool
@@ -43,3 +62,17 @@ class Solution(object):
             return False
 
 # %%
+
+
+head = ListNode(1)
+second = ListNode(2)
+third = ListNode(3)
+
+head.next = second
+second.next = third
+third.next = head
+
+ListNode(5).next == None
+
+Solution().hasCycle(head)
+Solution().hasCycle2(head)
