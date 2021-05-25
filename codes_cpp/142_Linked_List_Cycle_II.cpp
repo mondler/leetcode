@@ -82,10 +82,14 @@ ListNode *detectCycle(ListNode *head) {
                 slow = slow->next;
                 // cout << "slow at " << slow->val << endl;
                 if (fast == slow) {
-                        return true;
+                        fast = head;
+                        while (fast != slow) {
+                                fast = fast->next;
+                                slow = slow->next;
+                        }
+                        return slow;
                 }
         }
-
         return NULL;
 }
 };
@@ -116,7 +120,7 @@ int main() {
 
 
         Solution foo = Solution();
-        ListNode res = foo.detectCycle(head);
+        ListNode* res = foo.detectCycle(head);
         cout << res->val << endl;
         return 0;
 }
