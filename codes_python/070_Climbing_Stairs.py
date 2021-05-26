@@ -40,4 +40,42 @@
 # 1,987,673
 
 class Solution:
+    def __init__(self):
+        self.results = {
+            1: 1,
+            2: 2
+        }
+
+    # recursion
     def climbStairs(self, n: int) -> int:
+        if n not in self.results:
+            self.results[n] = self.climbStairs(n - 1) + self.climbStairs(n - 2)
+        return self.results[n]
+
+    # no recursion
+    def climbStairs2(self, n: int) -> int:
+        if n == 1:
+            return 1
+        a = b = 1
+        for _ in range(n - 1):
+            a, b = a + b, a
+        return a
+
+    # no recursion
+    def climbStairs3(self, n: int) -> int:
+        if n <= 2:
+            return n
+        results = [0] * n
+        results[0] = 1
+        results[1] = 2
+        for i in range(2, n):
+            results[i] = results[i - 2] + results[i - 1]
+        return results[-1]
+
+        # %%
+Solution().climbStairs(8)
+Solution().climbStairs2(8)
+Solution().climbStairs3(8)
+
+a = [0] * 8
+len(a)
