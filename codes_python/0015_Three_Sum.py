@@ -48,6 +48,8 @@ class Solution:
             if n1 > 0:
                 break
 
+            # if the the first # is the same as last time
+            # need to skip to avoid duplicates
             if ((i > 0) and (n1 == nums[i - 1])):
                 continue
 
@@ -61,6 +63,7 @@ class Solution:
 
                 if s == 0:
                     res.append([n1, n2, n3])
+                    # go for the next solution, skip if 2nd # is same as last time to avoid duplicates
                     while ((j < l) and (nums[j] == n2)):
                         j += 1
                     while ((k > j) and (nums[k] == n3)):
@@ -76,4 +79,4 @@ class Solution:
 # %%
 nums = [-1, 0, 1, 2, -1, -4]
 
-Solution().threeSum(nums)
+print(Solution().threeSum(nums))
