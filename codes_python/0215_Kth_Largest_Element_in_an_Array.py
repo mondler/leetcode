@@ -103,9 +103,68 @@ class Solution(object):
         return loc_for_low  # index of pivot
 
 
-# %%
+# %% quicksort; 20211012
 
-nums = [80, 80, 60, 70]
-# Solution().partition(nums, 0, 3)
-Solution().findKthLargest(nums, 2)
-random.randint(1, 10)
+class Solution2(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        n = len(nums)
+        if n == 1:
+            return nums[0]
+
+        return self.findKthLargest_inplace(nums, 0, n - 1, k, n)
+
+        # pos_pivot = self.partition(nums, 0, n - 1)
+        #
+        # if (n - pos_pivot) == k:
+        #     return nums[pos_pivot]
+        # elif (n - pos_pivot) < k:
+        #     return self.findKthLargest(nums[:pos_pivot], k - (n - pos_pivot))
+        # else:
+        #     return self.findKthLargest(nums[pos_pivot + 1:], k)
+
+    def findKthLargest_inplace(self, nums, left, right, k, n):
+        pos_pivot = self.partition(nums, left, right)
+        if (n - pos_pivot) == k:
+            return nums[pos_pivot]
+        elif (n - pos_pivot) < k:
+            return self.findKthLargest_inplace(nums, left, pos_pivot - 1, k, n)
+        else:
+            return self.findKthLargest_inplace(nums, pos_pivot + 1, right, k, n)
+
+    def partition(self, nums, left, right):
+        # partition nums from left to right based on a random pivot
+
+        # random pivot to avoid worst case
+        import random
+        idx_pivot = random.randint(left, right)
+        pivot = nums[idx_pivot]
+        # print(nums)
+        # print(pivot)
+
+        # move pivot to right
+        nums[idx_pivot], nums[right] = nums[right], nums[idx_pivot]
+
+        # i is the next position to put number lower than pivot
+        i = left
+        # scan through nums from left to right, if smaller than pivot, swap to i
+        for j in range(left, right + 1):  # last step put pivot in correct place
+            if nums[j] <= pivot:
+                nums[i], nums[j] = nums[j], nums[i]
+                i += 1
+        # print(nums)
+        return i - 1   # position of pivot in nums
+
+
+nums = [1, 3, 4, 2]
+
+Solution2().findKthLargest(nums, 1)
+Solution2().findKthLargest(nums, 2)
+Solution2().findKthLargest(nums, 3)
+Solution2().findKthLargest(nums, 4)
+# Solution().findKthLargest(nums, 2)
+# random.randint(1, 10)
