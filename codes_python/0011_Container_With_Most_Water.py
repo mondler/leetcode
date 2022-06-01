@@ -13,11 +13,6 @@ class Solution:
                 maxWater = max(maxWater, min(height[i], height[j]) * (j - i))
         return maxWater
 
-    def getMinHeightIdx(self, l, r, height):
-        if height[l] <= height[r]:
-            return l
-        return r
-
     def getWater(self, l, r, height):
         return min(height[l], height[r]) * (r - l)
 
@@ -30,10 +25,9 @@ class Solution:
             return 0
         while l < r:
             maxWater = max(maxWater, self.getWater(l, r, height))
-            m = self.getMinHeightIdx(l, r, height)
-            if m == l:
-                anchor_r = height[r]
-                anchor_l = height[l]
+            anchor_r = height[r]
+            anchor_l = height[l]
+            if height[l] <= height[r]:
                 l = l + 1
                 while (l < r):
                     if height[l] > anchor_l:
@@ -42,8 +36,6 @@ class Solution:
                         break
                     l = l + 1
             else:
-                anchor_r = height[r]
-                anchor_l = height[l]
                 r = r - 1
                 while (r > l):
                     if height[r] > anchor_r:
@@ -60,7 +52,7 @@ class Solution:
 solution = Solution()
 
 height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
-height = [1, 1]
+# height = [1, 1]
 print(f'Brute Force Solution:  {solution.maxAreaBruteForce(height)}')
 print(f'Best Solution:        {solution.maxArea(height)}')
 # print(f'Min Height Index:        {solution.getMinHeightIdx(0, 8, height)}')
