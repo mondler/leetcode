@@ -19,7 +19,7 @@
 
 
 class Solution(object):
-    def containsDuplicate(self, nums):
+    def containsDuplicate(self, nums) -> bool:
         """
         :type nums: List[int]
         :rtype: bool

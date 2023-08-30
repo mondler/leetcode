@@ -38,10 +38,13 @@ class Solution(object):
         """
 
         a, b = 0, 1
-        for _ in range(N):
+        for i in range(N):
             b, a = a + b, b
-
+            print(i, a, b)
         return a
+
+
+Solution().fib(2)
 
 
 # %%
@@ -78,4 +81,7 @@ class Solution(object):
 
 # %%
 
-Solution().fib(4)
+for i in range(2, 3):
+    print(i)
+
+# %%

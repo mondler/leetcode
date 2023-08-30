@@ -45,14 +45,27 @@ class Solution:
                     r = r - 1
         return maxWater
 
+    def maxArea2(self, height: list[int]) -> int:
+        # start from left and right, move the short height to middle
+        l = 0
+        r = len(height) - 1
+        area = 0
 
-# %%
+        while l < r:
+            area = max(area, self.getWater(l, r, height))
+            if height[l] <= height[r]:
+                l = l + 1
+            else:
+                r = r - 1
+        return area
 
 
+        # %%
 solution = Solution()
 
 height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
 # height = [1, 1]
 print(f'Brute Force Solution:  {solution.maxAreaBruteForce(height)}')
-print(f'Best Solution:        {solution.maxArea(height)}')
+print(f'Best Solution 1:        {solution.maxArea(height)}')
+print(f'Best Solution 2:        {solution.maxArea2(height)}')
 # print(f'Min Height Index:        {solution.getMinHeightIdx(0, 8, height)}')

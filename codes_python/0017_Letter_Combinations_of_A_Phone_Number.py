@@ -1,43 +1,70 @@
+#
+# @lc app=leetcode id=17 lang=python3
+#
+# [17] Letter Combinations of a Phone Number
+#
 # https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
-# 17. Letter Combinations of a Phone Number
-# Medium
 #
-# 3369
+# algorithms
+# Medium (54.65%)
+# Likes:    12279
+# Dislikes: 751
+# Total Accepted:    1.3M
+# Total Submissions: 2.4M
+# Testcase Example:  '"23"'
 #
-# 379
+# Given a string containing digits from 2-9 inclusive, return all possible
+# letter combinations that the number could represent. Return the answer in any
+# order.
 #
-# Add to List
-#
-# Share
-# Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.
-#
-# A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+# A mapping of digits to letters (just like on the telephone buttons) is given
+# below. Note that 1 does not map to any letters.
 #
 #
+# Example 1:
 #
-# Example:
 #
-# Input: "23"
-# Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
-# Note:
+# Input: digits = "23"
+# Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
 #
-# Although the above answer is in lexicographical order, your answer could be in any order you want.
 #
-# Accepted
-# 552,791
-# Submissions
-# 1,219,528
+# Example 2:
+#
+#
+# Input: digits = ""
+# Output: []
+#
+#
+# Example 3:
+#
+#
+# Input: digits = "2"
+# Output: ["a","b","c"]
+#
+#
+#
+# Constraints:
+#
+#
+# 0 <= digits.length <= 4
+# digits[i] is a digit in the range ['2', '9'].
+#
+#
+#
 
-# %% DFS ~32ms
-
-
-class Solution(object):
-    def letterCombinations(self, digits):
-        """
-        :type digits: str
-        :rtype: List[str]
-        """
-
+# @lc code=start
+class Solution:
+    def letterCombinations2(self, digits: str) -> List[str]:
+        def DFS(digits, index, l, cur, ans):
+            if l == len(digits):
+                if l > 0:
+                    ans.append("".join(cur))
+                return
+            # print(digits[l])
+            for c in index[digits[l]]:
+                cur[l] = c
+                DFS(digits, index, l + 1, cur, ans)
+            return
         n = len(digits)
         if n == 0:
             return []
@@ -52,61 +79,23 @@ class Solution(object):
         index['8'] = {'t', 'u', 'v'}
         index['9'] = {'w', 'x', 'y', 'z'}
 
-        ans = set()
-        word = [' ' for _ in range(n)]
-
-        def DFS(word, curr_digit):
-            # curr_digit = len(word)
-            if curr_digit == n:
-                ans.add(''.join(word))
-            else:
-                for letter in index[digits[curr_digit]]:
-                    word[curr_digit] = letter
-                    DFS(word, curr_digit + 1)
-
-        DFS(word, 0)
-
-        ans = [a for a in ans]
-
+        cur = [' ' for _ in range(len(digits))]
+        ans = []
+        DFS(digits, index, 0, cur, ans)
         return ans
 
-
-# %% BFS ~44ms
-
-
-class Solution(object):
     def letterCombinations(self, digits):
-        """
-        :type digits: str
-        :rtype: List[str]
-        """
-
-        n = len(digits)
-        if n == 0:
+        # BFS
+        if not digits:
             return []
-
-        index = dict()
-        index['2'] = {'a', 'b', 'c'}
-        index['3'] = {'d', 'e', 'f'}
-        index['4'] = {'g', 'h', 'i'}
-        index['5'] = {'j', 'k', 'l'}
-        index['6'] = {'m', 'n', 'o'}
-        index['7'] = {'p', 'q', 'r', 's'}
-        index['8'] = {'t', 'u', 'v'}
-        index['9'] = {'w', 'x', 'y', 'z'}
-
-        words = {''}
-
+        d = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+        ans = [""]
         for digit in digits:
-            tmp = set()
-            for word in words:
-                for letter in index[digit]:
-                    tmp.add(word + letter)
-            words = tmp
+            tmp = []
+            for s in ans:
+                for c in d[ord(digit) - ord('0')]:
+                    tmp.append(s + c)
+            ans = tmp
+        return ans
 
-        return words
-
-
-# %%
-Solution().letterCombinations('23')
-Solution().letterCombinations('')
+# @lc code=end
