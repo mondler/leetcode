@@ -50,5 +50,3 @@ class Solution:
 nums = [1, 2, 3, 4]
 solution = Solution()
 print(solution.productExceptSelf(nums))
-
-# %%

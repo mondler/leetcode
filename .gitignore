@@ -1,2 +1,4 @@
 /reference
 /codes_test
+codes_python/test
+*/.ipynb_checkpoints
