@@ -12,6 +12,7 @@
 
 # %%
 
+
 class Solution(object):
     def maxSubArray(self, nums):
         """
@@ -59,6 +60,7 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
+
         def divide_and_conquer(nums, i, j):
             if i == j - 1:
                 return nums[i], nums[i], nums[i], nums[i]
