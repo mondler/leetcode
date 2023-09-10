@@ -27,7 +27,7 @@
 
 
 # %% dutch colors
-class Solution(object):
+class Solution1(object):
     def sortColors(self, nums):
         """
         :type nums: List[int]
@@ -57,15 +57,18 @@ class Solution(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
+
         def quicksort(nums, left, right):
             if left < right:
                 j = self.partition(nums, left, right)
                 quicksort(nums, left, j - 1)
                 quicksort(nums, j + 1, right)
+
         quicksort(nums, 0, len(nums) - 1)
 
     def partition(self, nums, left, right):
         import random
+
         pivot = random.randint(left, right)
         nums[right], nums[pivot] = nums[pivot], nums[right]
         j = left  # place to put next low element
@@ -81,4 +84,4 @@ class Solution(object):
 # %%
 nums = [2, 0, 2, 1, 1, 0]
 Solution().sortColors(nums)
-nums
+print(nums)

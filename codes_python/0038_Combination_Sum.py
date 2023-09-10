@@ -52,21 +52,23 @@
 # 851,687
 # Submissions
 # 1,367,787
-
+# %%
 class Solution:
-    def combinationSum(self, candidates: list[int], target: int) -> list[list[int]]:
+    def combinationSum(
+        self, candidates: list[int], target: int
+    ) -> list[list[int]]:
         candidates.sort()
         res = []  # list of vectors adding to target
         self.dfs(candidates, target, 0, [], res)
         return res
 
     def dfs(self, candidates, target, l, cur, res):
-        if (target == 0):
+        if target == 0:
             res.append(cur.copy())
             return
 
         for i in range(l, len(candidates)):
-            if (candidates[i] > target):
+            if candidates[i] > target:
                 return
             cur.append(candidates[i])
             print(cur)
@@ -75,8 +77,10 @@ class Solution:
         return
 
 
-# %%
-candidates = [2, 3, 6, 7]
-target = 7
+# candidates = [2, 3, 6, 7]
+# target = 7
+
+candidates = [10, 1, 2, 7, 6, 1, 5]
+target = 8
 
 print(Solution().combinationSum(candidates, target))
